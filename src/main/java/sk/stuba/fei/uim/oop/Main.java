@@ -1,5 +1,6 @@
 package sk.stuba.fei.uim.oop;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
@@ -28,26 +29,44 @@ public class Main {
         if (arraySize == 0) {
             throw new Exception("Wrong array size");
         }
+        return new int[arraySize];
+    }
 
-        int[] newArray = new int[arraySize];
-        for (int i = 0; i < newArray.length; i++) {
+    public static void fillArrayFromKeyboard(int[] arrayToFill) {
+        for (int i = 0; i < arrayToFill.length; i++) {
             System.out.print("Enter " + i + " value : ");
-            newArray[i] = scanner.nextInt();
+            arrayToFill[i] = scanner.nextInt();
         }
-        return newArray;
+    }
+
+    public static void fillArrayRandomly(int[] arrayToFill) {
+        for (int i = 0; i < arrayToFill.length; i++) {
+            arrayToFill[i] = (int)(Math.random()*100);
+        }
     }
 
     public static void printArray(int[] arrayToPrint) {
         for(int number : arrayToPrint) {
             System.out.print(number + " ");
         }
+        System.out.println();
     }
 
     public static void main(String[] args) throws Exception {
         printHelloWorld();
         testCompareTwoInts();
-        int[] arrayOfInts = createSingleDimensionalArray(5);
-        printArray(arrayOfInts);
+
+
+        final int ARRAY_SIZE = 5;
+        int[] keyboardArray = createSingleDimensionalArray(ARRAY_SIZE);
+        fillArrayFromKeyboard(keyboardArray);
+        printArray(keyboardArray);
+
+        int[] randomArray = createSingleDimensionalArray(ARRAY_SIZE);
+        fillArrayRandomly(randomArray);
+        Arrays.sort(randomArray);
+        printArray(randomArray);
+
 
     }
 }
